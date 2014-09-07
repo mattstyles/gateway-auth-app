@@ -71,10 +71,11 @@
                     if ( !val ) return;
 
                     console.log( 'now attempting authentication' );
-                    this.$.xhr.body = {
+                    this.$.xhr.body = JSON.stringify({
                         user: this._username,
                         pass: this._password
-                    };
+                    });
+                    this.$.xhr.contentType = 'application/json';
                     this.$.xhr.url = '/login';
                 },
 
