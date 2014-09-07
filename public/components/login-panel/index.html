@@ -48,7 +48,7 @@
 
 
                 ready: function() {
-                    console.log( 'login-panel is ready' );
+                    // console.log( 'login-panel is ready' );
 
                     this.$.user.addEventListener( 'inputChange', this.onUserChange.bind( this ) );
                     this.$.pass.addEventListener( 'inputChange', this.onPassChange.bind( this ) );
@@ -75,7 +75,7 @@
                         user: this._username,
                         pass: this._password
                     };
-                    this.$.xhr.url = 'http://localhost:8008/login';
+                    this.$.xhr.url = '/login';
                 },
 
                 onAuthSuccess: function() {
