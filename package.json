@@ -1,11 +1,12 @@
 {
-  "name": "gateway-authentication-app",
+  "name": "gateway-auth-app",
   "version": "0.0.0",
   "description": "Serves the auth route that checks for a session cookie and prompts for login",
-  "main": "index.js",
+  "main": "lib/server.js",
   "scripts": {
     "start": "./bin/start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
   },
   "author": "matt styles @personalurban",
   "license": "ISC",
