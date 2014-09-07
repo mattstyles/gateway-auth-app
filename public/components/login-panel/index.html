@@ -26,7 +26,6 @@
 
             <core-ajax
                 id="xhr"
-                auto
                 handleAs="json"
                 method="POST"
                 response="{{res}}"
@@ -71,12 +70,14 @@
                     if ( !val ) return;
 
                     console.log( 'now attempting authentication' );
+
                     this.$.xhr.body = JSON.stringify({
                         user: this._username,
                         pass: this._password
                     });
                     this.$.xhr.contentType = 'application/json';
                     this.$.xhr.url = '/login';
+                    this.$.xhr.go();
                 },
 
                 onAuthSuccess: function() {
