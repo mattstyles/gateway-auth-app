@@ -1,0 +1,26 @@
+{
+  "name": "gateway",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "Matt Styles <matt@veryfizzyjelly.com>"
+  ],
+  "description": "Unauthenticated frontend for app-server",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.3",
+    "input-ripple": "~0.5.0",
+    "web-animations-js": "git://github.com/web-animations/web-animations-js.git",
+    "urban-icons": "~0.2.0",
+    "urban-login": "~0.3.0",
+    "core-ajax": "Polymer/core-ajax#~0.4.0"
+  }
+}

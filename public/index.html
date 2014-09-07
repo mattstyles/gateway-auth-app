@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Personal Urban</title>
+
+    <script src="./vendor/platform/platform.js"></script>
+
+    <link rel="import" href="./components/login-panel/">
+    <link rel="import" href="./components/bg-color/">
+
+    <style media="screen">
+        @import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            /*height: 100%;*/
+        }
+
+        body {
+            font-family: 'Varela Round', Lato;
+            font-weight: 300;
+            color: #333;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        login-panel {
+            color: #fffdfa;
+            font-size: 26px;
+            margin: 120px auto 0px;
+            width: 420px;
+            padding: 20px;
+            height: 480px;
+            border-radius: 12px;
+        }
+
+    </style>
+</head>
+<body unresolved touch-action="auto">
+    <bg-color colors="#9B59B6,#D91E18,#E74C3C,#F2784B,#BFBFBF,#1BBC9B,#049372,#2ECC71,#36D7B7,#3FC380,#1E824C,#59ABE3,#3498DB,#22313F,#3A539B,#4B77BE"></bg-color>
+    <login-panel id="loginbox" projectName="Gateway Test"></login-panel>
+</body>
+</html>

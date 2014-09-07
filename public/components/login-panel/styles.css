@@ -1,0 +1,38 @@
+:host {
+    display: block;
+    /*background: rgba( 255,255,255,0.2);*/
+    font: inherit;
+    color: inherit;
+    font-size: 34px;
+    padding: 20px;
+}
+
+h1 {
+    font: inherit;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0px auto 2em;
+    color:#fdfdfd;
+}
+
+
+input-ripple {
+    margin-top: .5em;
+    width: 100%;
+    text-align: center;
+}
+
+input-ripple /deep/ #label {
+    color: #ddd;
+}
+
+urban-login {
+    margin-top: 2em;
+}
+
+urban-login /deep/ paper-button {
+    color: #fdfdfa;
+}

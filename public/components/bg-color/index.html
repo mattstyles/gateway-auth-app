@@ -1,0 +1,22 @@
+<link rel="import" href="../../vendor/polymer/polymer.html">
+
+<polymer-element
+    name="bg-color"
+    attributes="colors">
+    <template>
+        <link rel="stylesheet" href="./styles.css">
+        <div class="box"></div>
+    </template>
+    <script charset="utf-8">
+        Polymer( 'bg-color', {
+            ready: function() {
+                console.log( 'bg-color is ready' );
+
+                var colorArray = this.colors.split( ',' ),
+                    i = Math.floor( Math.random() * ( colorArray.length - 1 ) );
+
+                this.style.background = colorArray[i] || '#000';
+            }
+        });
+    </script>
+</polymer-element>
