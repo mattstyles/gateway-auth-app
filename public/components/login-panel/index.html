@@ -82,12 +82,15 @@
 
                 onAuthSuccess: function() {
                     console.log( 'on success', this.res );
+
+                    location.reload();
                 },
 
                 onAuthFailure: function() {
                     this.$.login.hideLoading();
 
                     // TODO: show error hint
+                    // TODO: this may fire too quickly resulting in hideLoading() being fired during a transition, whereby it wont transition out properly
                 },
 
 
