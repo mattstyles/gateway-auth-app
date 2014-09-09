@@ -3,6 +3,10 @@
 INDEX='public/index.html'
 DEST='dist'
 
+if [ $1=='bower' ]
+  then bower install
+fi
+
 mkdir -p dist/public
 cp -r lib dist/lib
 cp -r bin dist

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./bin/start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "bower install && ./build.sh"
+    "postinstall": "./build.sh bower"
   },
   "author": "matt styles @personalurban",
   "license": "ISC",
