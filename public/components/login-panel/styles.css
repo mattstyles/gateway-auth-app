@@ -15,7 +15,7 @@ h1 {
     text-transform: uppercase;
     text-align: center;
     margin: 0px auto 2em;
-    color:#fdfdfd;
+    color:#fdfdfa;
 }
 
 
@@ -29,10 +29,39 @@ input-ripple /deep/ #label {
     color: #ddd;
 }
 
-urban-login {
-    margin-top: 2em;
-}
+urban-login {}
 
 urban-login /deep/ paper-button {
     color: #fdfdfa;
+}
+
+urban-notification {
+    margin-top: 1em;
+    text-align: center;
+    /*color: #ff2114;*/
+}
+
+urban-notification /deep/ svg {
+    /*fill: #ff2114;*/
+}
+
+urban-notification > div {
+    font-weight: 400;
+    font-size: 14px;
+    display: inline-block;
+}
+
+urban-notification > div.transparent {
+    opacity: 0;
+}
+
+
+urban-notification core-icon + span {
+    margin-left: 8px;
+}
+
+urban-notification /deep/ #icon {
+    width: 18px;
+    height: 18px;
+    top: -1px;
 }

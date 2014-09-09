@@ -2,6 +2,7 @@
 <link rel="import" href="../../vendor/input-ripple/input-ripple.html">
 <link rel="import" href="../../vendor/urban-icons/urban-icons.html">
 <link rel="import" href="../../vendor/urban-login/urban-login.html">
+<link rel="import" href="../../vendor/urban-notification/urban-notification.html">
 <link rel="import" href="../../vendor/core-ajax/core-ajax.html">
 
 <polymer-element
@@ -20,6 +21,12 @@
             <input-ripple id="user" label="username" center></input-ripple>
             <input-ripple id="pass" label="password" center password></input-ripple>
 
+            <urban-notification id="notification">
+                <div class="wrap">
+                    <core-icon id="icon" icon="urban:attention"></core-icon><span>This is a notification</span>
+                </div>
+            </urban-notification>
+
             <urban-login id="login" label="Login" loadState="true">
                 <core-icon icon="urban:loading"></icon>
             </urban-login>
@@ -34,90 +41,5 @@
         </div>
     </template>
 
-    <script charset="utf-8">
-        (function() {
-
-            Polymer( 'login-panel', {
-                publish: {
-                    _username: '',
-                    _password: '',
-                    projectName: 'Project name',
-                    res: null
-                },
-
-
-                ready: function() {
-                    // console.log( 'login-panel is ready' );
-
-                    this.$.user.addEventListener( 'inputChange', this.onUserChange.bind( this ) );
-                    this.$.pass.addEventListener( 'inputChange', this.onPassChange.bind( this ) );
-                },
-
-                observe: {
-                    '$.login._loading': 'authenticate'
-                },
-
-
-                onKeypress: function( event, detail, sender ) {
-                    if ( event.keyCode === 13 && !this.$.login._loading && this.$.login._showing ) {
-                        // Now start authentication
-                        this.$.login.showLoading();
-                    }
-                },
-
-
-                authenticate: function( old, val ) {
-                    if ( !val ) return;
-
-                    console.log( 'now attempting authentication' );
-
-                    this.$.xhr.body = JSON.stringify({
-                        user: this._username,
-                        pass: this._password
-                    });
-                    this.$.xhr.contentType = 'application/json';
-                    this.$.xhr.url = '/login';
-                    this.$.xhr.go();
-                },
-
-                onAuthSuccess: function() {
-                    console.log( 'on success', this.res );
-
-                    location.reload();
-                },
-
-                onAuthFailure: function() {
-                    this.$.login.hideLoading();
-
-                    // TODO: show error hint
-                    // TODO: this may fire too quickly resulting in hideLoading() being fired during a transition, whereby it wont transition out properly
-                },
-
-
-
-                onUserChange: function( event ) {
-                    this._username = event.detail;
-                    this.doAnim( this.checkDetails() );
-                },
-
-                onPassChange: function( event ) {
-                    this._password = event.detail;
-                    this.doAnim( this.checkDetails() );
-                },
-
-                doAnim: function( flag ) {
-                    if ( this.$.login._loading ) return;
-
-                    flag ? this.$.login.show() : this.$.login.hide();
-                },
-
-                checkDetails: function() {
-                    return ( this._username.length && this._password.length );
-                }
-
-            });
-
-        })();
-
-    </script>
+    <script src="./script.js"></script>
 </polymer-element>
