@@ -1,6 +1,9 @@
 (function() {
 
     Polymer( 'login-panel', {
+
+        _notificationText: 'This is a notification',
+
         publish: {
             _username: '',
             _password: '',
@@ -80,6 +83,28 @@
 
         checkDetails: function() {
             return ( this._username.length && this._password.length );
+        },
+
+
+        get notificationText() {
+            return this._notificationText;
+        },
+
+        set notificationText( value ) {
+            console.log( 'setting:', value );
+
+            // If the bar is showing, then hide, update and show
+            if ( this.$.notification._showing ) {
+                this.$.notification.hide();
+                this.$.notification.addEventListener( 'hideEnd', function( event ) {
+                    this._notificationText = value;
+                    this.$.notification.show();
+                }.bind( this ) );
+                return;
+            }
+
+            //  If we got here then the bar is currently hidden so just update the text
+            this._notificationText = value;
         }
 
     });
