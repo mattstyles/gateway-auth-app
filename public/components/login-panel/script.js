@@ -53,6 +53,7 @@
         onAuthFailure: function() {
             this.$.login.hideLoading();
 
+            this.notificationText = 'Error logging in';
             this.$.notification.show();
 
             // TODO: show error hint
@@ -91,20 +92,79 @@
         },
 
         set notificationText( value ) {
-            console.log( 'setting:', value );
+            if ( this._notificationText === value ) return;
+
+            // TODO: sort this out properly
+            var self = this;
+
+            function update( event ) {
+                self.$.notification.removeEventListener( 'hideEnd', update );
+                self._notificationText = value;
+                self.updateNotificationText( value );
+                self.$.notification.show();
+            }
 
             // If the bar is showing, then hide, update and show
             if ( this.$.notification._showing ) {
+                this.$.notification.addEventListener( 'hideEnd', update );
                 this.$.notification.hide();
-                this.$.notification.addEventListener( 'hideEnd', function( event ) {
-                    this._notificationText = value;
-                    this.$.notification.show();
-                }.bind( this ) );
                 return;
             }
 
             //  If we got here then the bar is currently hidden so just update the text
             this._notificationText = value;
+            this.updateNotificationText( value );
+        },
+
+        updateNotificationText: function( value ) {
+            var frag = this.splitNotificationText( value );
+            this.notificationContent( frag );
+        },
+
+
+        /**
+         * Splits the notification text into words and returns a dom fragment containing the words in spans
+         */
+        splitNotificationText: function( text ) {
+            var el = null,
+                words = text.split( ' ' ),
+                fragment = document.createDocumentFragment();
+
+            words.forEach( function( word ) {
+                el = document.createElement( 'span' );
+                el.innerHTML = word + '&nbsp;';
+                fragment.appendChild( el );
+                el = null;
+            });
+
+            return fragment;
+        },
+
+        notificationContent: function( fragment ) {
+            if ( !fragment ) {
+                console.log( 'Error:', 'notification fragment not supplied' );
+                return;
+            }
+
+            var list = this.$.notification.querySelectorAll( 'span' );
+            Array.prototype.forEach.call( list, function( el ) {
+                this.$.notification.removeChild( el );
+            }.bind( this ) );
+
+            function span( text ) {
+                var s = document.createElement( 'span' );
+                s.innerHTML = text;
+                return s;
+            }
+
+
+            this.$.notification.appendChild( fragment );
+
+            // TODO: shoudlnt just call attached, this change needs
+            // to be done in the notification element to
+            // allow a content refresh
+            this.$.notification.attached();
+
         }
 
     });
