@@ -49,9 +49,9 @@ urban-notification-bar span {
 urban-notification-bar {
     font-weight: 400;
     font-size: 14px;
-    color: #444;
+    color: #96281B;
 }
 
 urban-notification-bar core-icon /deep/ svg {
-    fill: #444;
+    fill: #96281B;
 }
