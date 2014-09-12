@@ -13,8 +13,10 @@
 
 
         ready: function() {
-            this.$.user.addEventListener( 'inputChange', this.onUserChange.bind( this ) );
-            this.$.pass.addEventListener( 'inputChange', this.onPassChange.bind( this ) );
+            this.bindAll( this );
+
+            this.$.user.addEventListener( 'inputChange', this.onUserChange );
+            this.$.pass.addEventListener( 'inputChange', this.onPassChange );
         },
 
         observe: {
@@ -53,8 +55,8 @@
         onAuthFailure: function() {
             this.$.login.hideLoading();
 
+            this.$.notification.addEventListener( 'contentUpdated', this.showOnContentUpdated );
             this.notificationText = 'Error logging in';
-            this.$.notification.show();
 
             // TODO: show error hint
         },
@@ -99,24 +101,24 @@
 
             function update( event ) {
                 self.$.notification.removeEventListener( 'hideEnd', update );
-                self._notificationText = value;
                 self.updateNotificationText( value );
-                self.$.notification.show();
             }
 
             // If the bar is showing, then hide, update and show
             if ( this.$.notification._showing ) {
                 this.$.notification.addEventListener( 'hideEnd', update );
+                this.$.notification.addEventListener( 'contentUpdated', this.showOnContentUpdated );
                 this.$.notification.hide();
                 return;
             }
 
             //  If we got here then the bar is currently hidden so just update the text
-            this._notificationText = value;
             this.updateNotificationText( value );
         },
 
+
         updateNotificationText: function( value ) {
+            this._notificationText = value;
             var frag = this.splitNotificationText( value );
             this.notificationContent( frag );
         },
@@ -157,14 +159,30 @@
                 return s;
             }
 
-
             this.$.notification.appendChild( fragment );
+        },
 
-            // TODO: shoudlnt just call attached, this change needs
-            // to be done in the notification element to
-            // allow a content refresh
-            this.$.notification.attached();
+        showOnContentUpdated: function() {
+            this.$.notification.removeEventListener( 'contentUpdated', this.showOnContentUpdated );
+            this.$.notification.show();
+        },
 
+
+        /**
+         * Simple, dirty bindAll implementation
+         *
+         * @param ctx {Object} the context to bind `this` to
+         */
+        bindAll: function( ctx ) {
+            for ( method in this ) {
+                if ( typeof this[ method ] === 'function' && !this.hasOwnProperty( method ) ) {
+                    try {
+                        this[ method ] = this[ method ].bind( ctx );
+                    } catch( err ) {
+                        console.log( 'login-panel:: method binding error', method, err );
+                    }
+                }
+            }
         }
 
     });
