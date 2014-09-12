@@ -7,8 +7,8 @@ if [ $1=='bower' ]
   then bower install
 fi
 
-mkdir -p dist/public
-cp -r lib dist/lib
-cp -r bin dist
-cp index.js dist
+mkdir -p $DEST/public
+cp -r lib $DEST
+cp -r bin $DEST
+cp index.js $DEST
 vulcanize $INDEX -o $DEST/$INDEX --inline --csp --strip
