@@ -29,39 +29,29 @@ input-ripple /deep/ #label {
     color: #ddd;
 }
 
-urban-login {}
+urban-login {
+    margin-top: 2em;
+}
 
 urban-login /deep/ paper-button {
     color: #fdfdfa;
 }
 
-urban-notification {
-    margin-top: 1em;
-    text-align: center;
-    /*color: #ff2114;*/
+urban-notification-bar core-icon {
+    display: inline-block;
+    margin-right: 8px;
 }
 
-urban-notification /deep/ svg {
-    /*fill: #ff2114;*/
-}
-
-urban-notification > div {
-    font-weight: 400;
-    font-size: 14px;
+urban-notification-bar span {
     display: inline-block;
 }
 
-urban-notification > div.transparent {
-    opacity: 0;
+urban-notification-bar {
+    font-weight: 400;
+    font-size: 14px;
+    color: #444;
 }
 
-
-urban-notification core-icon + span {
-    margin-left: 8px;
-}
-
-urban-notification /deep/ #icon {
-    width: 18px;
-    height: 18px;
-    top: -1px;
+urban-notification-bar core-icon /deep/ svg {
+    fill: #444;
 }

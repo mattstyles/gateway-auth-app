@@ -2,7 +2,7 @@
 <link rel="import" href="../../vendor/input-ripple/input-ripple.html">
 <link rel="import" href="../../vendor/urban-icons/urban-icons.html">
 <link rel="import" href="../../vendor/urban-login/urban-login.html">
-<link rel="import" href="../../vendor/urban-notification/urban-notification.html">
+<link rel="import" href="../../vendor/urban-notification-bar/urban-notification-bar.html">
 <link rel="import" href="../../vendor/core-ajax/core-ajax.html">
 
 <polymer-element
@@ -21,11 +21,9 @@
             <input-ripple id="user" label="username" center></input-ripple>
             <input-ripple id="pass" label="password" center password></input-ripple>
 
-            <urban-notification id="notification">
-                <div class="wrap">
-                    <core-icon id="icon" icon="urban:attention"></core-icon><span>This is a notification</span>
-                </div>
-            </urban-notification>
+            <urban-notification-bar id="notification">
+                <core-icon id="icon" icon="urban:attention"></core-icon><span>This is a notification</span>
+            </urban-notification-bar>
 
             <urban-login id="login" label="Login" loadState="true">
                 <core-icon icon="urban:loading"></icon>

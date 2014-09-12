@@ -70,7 +70,12 @@
         doAnim: function( flag ) {
             if ( this.$.login._loading ) return;
 
-            flag ? this.$.login.show() : this.$.login.hide();
+            this.$.notification.hide();
+
+
+            flag
+                ? this.$.login.show()
+                : this.$.login.hide();
         },
 
         checkDetails: function() {
