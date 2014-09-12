@@ -34,11 +34,32 @@
             color: #fffdfa;
             font-size: 26px;
             margin: 120px auto 0px;
-            width: 420px;
+            max-width: 420px;
             padding: 20px;
-            height: 480px;
+            max-height: 480px;
             border-radius: 12px;
         }
+
+        @media only screen
+            and (max-device-width: 480px) {
+
+            login-panel {
+                margin-top: 60px;
+                max-height: 420px;
+            }
+        }
+
+        @media only screen
+            and (max-device-height: 480px) {
+
+            login-panel {
+                margin-top: 30px;
+                max-height: 400px;
+            }
+        }
+
+
+
 
     </style>
 </head>
