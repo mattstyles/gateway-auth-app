@@ -111,7 +111,7 @@
             });
             this.$.xhr.contentType = 'application/json';
             this.$.xhr.url = '/login';
-            this.$.xhr.go();
+            this.res = this.$.xhr.go();
         },
 
 
@@ -120,24 +120,37 @@
          * Reloads the page, whereby the actual content will be served (rather than hitting the gateway route)
          */
         onAuthSuccess: function() {
-            console.log( 'on success', this.res );
+            this.$.notification.addEventListener( 'contentUpdated', this.showOnContentUpdated );
+            this.notificationText = 'Login Successful! Give me a sec while I open the locks.';
 
-            location.reload();
+            setTimeout( function() {
+                location.reload();
+            }, 1500 + ( Math.random() * 1500 ) );
         },
 
 
         /**
          * Fired on authentication failure.
          * Usually this will be a 401 unauthorized, although it could be a 503 service unreachable.
-         * TODO: Respond to statusCode with an appropriate error message.
          */
-        onAuthFailure: function() {
+        onAuthFailure: function( event ) {
             this.$.login.hideLoading();
 
-            this.$.notification.addEventListener( 'contentUpdated', this.showOnContentUpdated );
-            this.notificationText = 'Error logging in';
+            // Hard-code response strings here - fancy-pants coding not included
+            var response = {
+                '401': 'Login or password incorrect',
+                '404': 'Authentication service not found, please try again later',
+                '503': 'Authentication service unreachable, please try again later',
+                _default: 'Unspecified authentication failure, please try again later',
 
-            // TODO: show error hint
+                get: function( status ) {
+                    return this[ status ] || this._default;
+                }
+            };
+
+            // Prepare the notification bar to show itself when the text is updated and then show it by updating the text
+            this.$.notification.addEventListener( 'contentUpdated', this.showOnContentUpdated );
+            this.notificationText = 'Error: ' + response.get( this.res.status );
         },
 
 
@@ -198,7 +211,11 @@
          * @param value {String} the text of the notification
          */
         set notificationText( value ) {
-            if ( this._notificationText === value ) return;
+            if ( this._notificationText === value ) {
+                // Manually fire the content changed event to make the bar show if it should be - this is a pretty large hack hack
+                this.$.notification.fire( 'contentUpdated' );
+                return;
+            };
 
             var self = this;
 
