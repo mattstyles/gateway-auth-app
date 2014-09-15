@@ -345,9 +345,7 @@
          */
         checkDetails: function() {
             return ( this._username.length && this._password.length );
-        },
-
-
+        }
 
     });
 
