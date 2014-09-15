@@ -23,6 +23,7 @@
     "urban-login": "~0.3.0",
     "urban-notification": "~0.1.1",
     "core-ajax": "Polymer/core-ajax#~0.4.0",
-    "bezier-easing": "~1.0.0"
+    "bezier-easing": "~1.0.0",
+    "urban-notification-bar": "~0.2.1"
   }
 }
