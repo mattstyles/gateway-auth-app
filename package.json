@@ -18,9 +18,5 @@
     "koa-logger": "^1.2.1",
     "koa-route": "^1.1.4",
     "koa-static": "^1.4.5"
-  },
-  "devDependencies": {
-    "gulp": "^3.8.5",
-    "gulp-rimraf": "^0.1.0"
   }
 }
